@@ -1,0 +1,66 @@
+<div class="easyui-layout" data-options="fit:true" charset=utf-8 >
+<script type="text/javascript" src="./js/errorTemperature_Management.js"></script> 
+
+    <div data-options="region:'center',border:false">
+    	<!-- Begin of toolbar -->
+        <div id="wu-toolbar">
+        
+            <form name="search" class="wu-toolbar-search">
+                <label>组号</label> 
+                <select name=groupID class="easyui-combobox" panelHeight="auto" style="width:100px" size="5">
+                <option value="1" selected="selected">1组</option>
+                <option value="2">2组</option>
+                <option value="3">3组</option>
+                <option value="4">4组</option>
+                <option value="5">5组</option>
+                <option value="6">6组</option>
+                <option value="7">7组</option>
+                <option value="8">8组</option>
+                <option value="9">9组</option>
+                <option value="10">10组</option>
+                </select>
+              
+                <label>罐号</label> 
+                <select name=jarID class="easyui-combobox" panelHeight="auto" style="width:100px" size="10">
+                <option value="1" selected="selected">罐1</option>
+                <option value="2">罐2</option>
+                <option value="3">罐3</option>
+                <option value="4">罐4</option>
+                <option value="5">罐5</option>
+                <option value="6">罐6</option>
+                <option value="7">罐7</option>
+                <option value="8">罐8</option>
+                <option value="9">罐9</option>
+                <option value="10">罐10</option>
+                <option value="11">罐11</option>
+                <option value="12">罐12</option>
+                <option value="13">罐13</option>
+                <option value="14">罐14</option>
+                <option value="15">罐15</option>
+                <option value="16">罐16</option>
+                <option value="17">罐17</option>
+                <option value="18">罐18</option>
+                <option value="19">罐19</option>
+                <option value="20">罐20</option>
+                <option value="21">罐21</option>
+                <option value="22">罐22</option>
+                <option value="23">罐23</option>
+                <option value="24">罐24</option>
+                <option value="25">罐25</option>
+                <option value="26">罐26</option>
+                <option value="27">罐27</option>
+                <option value="28">罐28</option>
+                <option value="29">罐29</option>
+                <option value="30">罐30</option>
+                </select>
+                
+                
+                
+                <a href="#" id="search-temperature" class="easyui-linkbutton" onclick="searcherror()" iconCls="icon-search">开始查询</a>
+            </form>
+        </div>
+      
+        <!-- End of toolbar -->
+        <table id="datagrid-temperature" toolbar="#wu-toolbar"></table>
+    </div>
+</div>

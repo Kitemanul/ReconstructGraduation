@@ -1,0 +1,97 @@
+
+<div class="easyui-layout" data-options="fit:true" >
+<script type="text/javascript" src="./js/Celler_Management.js"></script> 
+
+    <div data-options="region:'center',border:false" charset=utf-8>
+    	<!-- Begin of toolbar -->
+        <div id="wu-toolbar">
+            <div class="wu-toolbar-button">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">编辑</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>               
+               
+              
+            </div>
+            <form name="search" class="wu-toolbar-search">
+                <label>入窖时间</label><input id="times" name="startime" class="easyui-datebox" style="width:100px">
+                <label>出窖时间</label><input id="timee" name="endtime" class="easyui-datebox" style="width:100px">
+                <label>组号</label><input name="groupID" value=""  class="wu-text" style="width:100px">
+                <label>罐号</label><input name="jarID" value=""   class="wu-text" style="width:100px">
+                <label>周期</label><input name="cycle" value=""   class="wu-text" style="width:100px">
+                
+                <a href="#" id="search-celler" class="easyui-linkbutton" onclick="Search()" iconCls="icon-search">开始查询</a>
+            </form>
+        </div>
+        <!-- End of toolbar -->
+        <table id="datagrid-celler" toolbar="#wu-toolbar"></table>
+    </div>
+</div>
+<!-- Begin of easyui-dialog -->
+<div id="wu-dialogadd" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+	<form name="formadd" method="post">
+        <table>
+            <tr>
+                <td width="60" align="right">入窖时间:</td>
+                <td><input type="text" name="time1" class="wu-text" value="2017-11-17 08:46:36.000" /></td>
+            </tr>
+            <tr>
+                <td align="right">出窖时间:</td>
+                <td><input type="text" name="time2" class="wu-text" value="2017-11-17 08:46:36.000"/></td>
+            </tr>
+             <tr>
+                <td align="right">预期时间:</td>
+                <td><input type="text" name="time3" class="wu-text" value="2017-11-17 08:46:36.000"/></td>
+            </tr>
+              <tr>
+                <td align="right">录入时间:</td>
+                <td><input type="text" name="time0" class="wu-text" value="2017-11-17 08:46:36.000"/></td>
+            </tr>
+            <tr>
+                <td align="right">组号:</td>
+                <td><input type="text" name="group" class="wu-text" value="1"/></td>
+            </tr>
+               <tr>
+                <td align="right">周期:</td>
+                <td><input type="text" name="cycle" class="wu-text" value="1"/></td>
+            </tr>
+            <tr>
+                <td valign="top" align="right">罐号:</td>
+                <td><input type="text" name="jar" class="wu-text" value="1"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+<div id="wu-dialogedit" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+	<form name="formedit" method="post">
+        <table>
+            <tr>
+                <td width="60" align="right">入窖时间:</td>
+                <td><input type="text" name="time1" id="time1id" class="wu-text"  /></td>
+            </tr>
+            <tr>
+                <td align="right">出窖时间:</td>
+                <td><input type="text" name="time2" id="time2id" class="wu-text"  /></td>
+            </tr>
+            
+              <tr>
+                <td align="right">录入时间:</td>
+                <td><input type="text" name="time0" id="time0id" class="wu-text" /></td>
+            </tr>
+            <tr>
+                <td align="right">组号:</td>
+                <td><input type="text" name="group" id="groupid" class="wu-text" /></td>
+            </tr>
+               <tr>
+                <td align="right">周期:</td>
+                <td><input type="text" name="cycle" id="cycleid" class="wu-text"  /></td>
+            </tr>
+            <tr>
+                <td valign="top" align="right">罐号:</td>
+                <td><input type="text" name="jar" id="jarid" class="wu-text"  /></td>
+            </tr>
+        </table>
+    </form>
+</div>

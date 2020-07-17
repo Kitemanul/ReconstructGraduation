@@ -1,0 +1,25 @@
+*{margin:0;padding:0;border:none;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#E4393C;text-decoration:underline;}
+body{width:100%;background:url(../images/bg.png) no-repeat center;font:14px 微软雅黑;}
+.content-wrapper{}
+.logo{width:100%;height:100px;background:url(../images/logo.png) no-repeat center;}
+.form-wrapper{width:30%;min-width:235px;max-width:350px;margin:0 auto;padding:5px 15px 15px;background:#fff;border-top:1px solid #eee;box-shadow:5px 5px 15px 1px #333;background:rgba(255,255,255,0.6)!important;filter:Alpha(opacity=80);}
+.form-wrapper-title{height:35px;line-height:35px;font-size:1.2em;border-bottom:2px solid #22aee8;color:#333;}
+.element label,.element .message,.element input[type="text"],.element input[type="password"],
+
+.element input[type="button"]{display:inline-block;width:100%;height:35px;line-height:35px;font-size:1.1em;hide-focus:expression(this.hideFocus=true);outline:0;}
+
+.element label{color:#333;}
+.element .message{background-color:#eee;color:#f00;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:none;}
+.element input{border:1px solid #aaa;box-sizing:border-box;padding:0 5px;}
+.element input:focus{border:1px solid #22aee8;}
+.element input[type="checkbox"]{padding:0;vertical-align:middle;}
+
+.element input[type="button"]{color:#fff;background-color:#22aee8;letter-spacing:20px;text-indent:20px;font-weight:bold;border:1px solid #fff;transition: background-color 300ms ease-out,border-color 300ms ease-out;cursor:pointer;}
+
+.element input[type="button"]:hover{background-color:#fa0;border:1px solid #22aee8;}
+.auto-login-wrapper,.forget-password-wrapper{width:100%;height:35px;line-height:35px;color:#333;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.auto-login-wrapper{float:left;}
+.my-placeholder{color:#333 !important;}
+.clear{clear:both;}

@@ -1,0 +1,89 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div class="easyui-layout" data-options="fit:true" >
+<script type="text/javascript" src="./js/User_Management.js"></script> 
+
+    <div data-options="region:'center',border:false" charset=utf-8>
+    	<!-- Begin of toolbar -->
+        <div id="wu-toolbar">
+            <div class="wu-toolbar-button">
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">添加</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">编辑</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">删除</a>               
+               
+              
+            </div>
+            <form name="searchuser" class="wu-toolbar-search">
+               
+                <label>用户名</label><input name="username" value=""  class="wu-text" style="width:100px">
+                <label>权限</label><select name="right" value=""   class="easyui-combobox" style="width:100px">
+                <option value="0">全部</option>
+                <option value="1">1级</option>
+                <option value="2">2级</option>
+                </select>
+              
+                
+                <a href="#" id="search-celler" class="easyui-linkbutton" onclick="Searchuser()" iconCls="icon-search">开始查询</a>
+            </form>
+        </div>
+        <!-- End of toolbar -->
+        <table id="datagrid-user" toolbar="#wu-toolbar"></table>
+    </div>
+</div>
+<!-- Begin of easyui-dialog -->
+<div id="wu-dialogadd" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+	<form name="formadduser" method="post">
+        <table>
+           
+            <tr>
+                <td align="right">用户名:</td>
+                <td><input type="text" name="username" class="wu-text" /></td>
+            </tr>
+               <tr>
+                <td align="right">密码:</td>
+                <td><input type="password" name="password" class="wu-text" /></td>
+                 <tr>
+                 <tr>
+				<td class="tableheader">确认密码：</td>
+			    <td><input value="" name="repeatPwd" type="password" class="wu-text">
+				</td>
+				</tr>
+                <td align="right">权限:</td>
+                <td> 
+                <select name="right"  class="easyui-combobox" style="width:100px">
+                
+                <option value="1">1级</option> 
+                <option value="2">2级</option>
+                </select></td>          
+        </table>
+    </form>
+</div>
+
+
+
+<div id="wu-dialogedit" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+	<form name="formedituser" method="post">
+        <table>
+            <tr>
+                <td align="right">用户名:</td>
+                <td><input type="text" name="username" id="usernameid" class="wu-text" /></td>
+            </tr>
+               <tr>
+                <td align="right">密码:</td>
+                <td><input type="password" name="password" class="wu-text" /></td>
+                 <tr>
+                 <tr>
+				<td class="tableheader">确认密码：</td>
+			    <td><input value="" name="repeatPwd" type="password" class="wu-text">
+				</td>
+				</tr>
+                <td align="right">权限:</td>
+                <td> 
+                <select name="right" id="rightid" class="easyui-combobox" style="width:100px">
+                
+                <option value="1">1级</option> 
+                <option value="2">2级</option>
+                </select></td>   
+        </table>
+    </form>
+</div>
+
