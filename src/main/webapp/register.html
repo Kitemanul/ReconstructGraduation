@@ -1,0 +1,114 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<script type="text/javascript" src="./JS/register.js"></script>
+<script type="text/javascript" src="./easyuidemo/js/jquery-1.8.0.min.js"></script>
+<link rel="shortcut icon" href="plug-in/sino/ui/demo/images/favicon.ico">
+
+<script type="text/javascript">
+
+<html>
+
+	<head>
+
+		<title>用户注册</title>
+		<script src="plug-in/jquery-plugs/jquery.maskedinput-1.0.js"></script>
+		<link rel="stylesheet" href="plug-in/sino/ui/sino02/assets/css/font-awesome.min.css" />
+		<script src="js/yqhdfwbRegister.js"></script>
+		<style type="text/css">
+			.info {
+				color: red
+			}
+			
+			.alert {
+				color: blue
+			}
+			
+			.table input {
+				border: 1px solid #a5aeb6;
+				width: 150px;
+				padding: 3px 2px;
+			}
+			
+			.table select {
+				padding: 3px 2px;
+				width: 150px;
+			}
+			
+			.table textarea {
+				padding: 3px 2px;
+			}
+			
+			.table {
+				margin-top: 3px;
+				margin-left: 2px;
+				margin-right: 2px;
+				width: 98%;
+				background-color: #fff;
+				border-collapse: collapse;
+				line-height: 20px;
+			}
+			
+			.table td {
+				border: 1px solid #B8CCE2;
+			}
+			
+			.fix-width{
+				width: 432px;
+			}
+			.tableheader {
+				background-color: #F0F9FD;
+				padding: 5px;
+				text-align: right;
+				width: 17%;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+			<input type="hidden" id="userid" value="" />
+			<div align="center"><span><strong style="font-size: 24px;color:red">注册页面</strong></span></div>
+			<form id="registerFormId" name="registerForm" action="" method="post" enctype="multipart/form-data">
+				<hr>
+				<div align="left">
+					
+					
+				
+					<table class="table">
+						<tr>
+							<td class="tableheader">用户名：
+								<font color="red">*</font>
+							</td>
+							<td class="fix-width"><input  name="username" type="text" value=""  required="required" maxlength="50" class="easyui-validatebox" onblur="checkUsername(this.value);checkIsRegistedUnit();" onfocus="cleanNameinfo();" />
+								<span id="checkUsername" class="info"></span>
+							</td>	
+						</tr>
+						<tr>
+							<td class="tableheader">密码：
+								<font color="red">*</font>
+							</td>
+							<td>
+								<input style="width: 150px"name="password" value="" type="password" maxlength="100" class="easyui-validatebox" onblur="validatePwd1();checkIsRegistedUnit();">
+								<span id="qrPassword1" class="info">*密码是10位字母和数字的组合！</span>
+							</td>
+								
+							
+						</tr>
+						<tr>
+							<td class="tableheader">确认密码：</td>
+							<td><input style="width: 150px" value="" name="repeatPwd" type="password" maxlength="100" class="easyui-validatebox"  onblur="validatePwd();checkIsRegistedUnit();" onfocus="cleanpwdinfo();">
+								<span id="qrPassword" class="info"></span>
+							</td>
+						</tr>				
+					</table>
+				</div>
+				<hr>
+				
+				<div align="center">
+					<input id="registerId" type="button" class="easyui-linkbutton" value="注册帐号" onclick="register()">
+					<input id="retrunId" type="button" class="easyui-linkbutton" value="返回登录页面" onclick="window.location.href='./login.html'">
+				</div>
+			</form>
+	</body>
+
+</html>

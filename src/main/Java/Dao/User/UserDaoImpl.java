@@ -25,8 +25,8 @@ public class UserDaoImpl implements UserDao {
                 if(set.next())
                 {
                     user=new User();
-                    user.setUsername(set.getString("username"));
-                    user.setMm(set.getString("mm"));
+                    user.setUsername(set.getString("username").trim());
+                    user.setMm(set.getString("mm").trim());
                     user.setPermission(set.getInt("permission"));
                     user.setPass(set.getInt("pass"));
                     user.setPrimary_key(set.getInt("primary_key"));
@@ -39,5 +39,25 @@ public class UserDaoImpl implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public int InsertUser(Connection con, User user) {
+
+        PreparedStatement preparedStatement=null;
+        int row=0;
+        String sql="insert into UserManagement (username,mm,permission,pass) values(?,?,?,?)";
+
+        Object ob[]={user.getUsername(),user.getMm(),user.getPermission(),user.getPass()};
+
+
+        try {
+            row=BaseDao.Update(con,sql,preparedStatement,ob);
+            BaseDao.close(null,preparedStatement,null);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return row;
     }
 }

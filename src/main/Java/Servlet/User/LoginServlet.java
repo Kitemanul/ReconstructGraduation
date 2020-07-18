@@ -17,8 +17,8 @@ import java.io.Writer;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String username=request.getParameter("userName");
-        String pw=request.getParameter("password");
+        String username=request.getParameter("user");
+        String pw=request.getParameter("pwd");
 
         UserServiceImpl service=new UserServiceImpl();
         PrintWriter out=response.getWriter();
@@ -44,6 +44,10 @@ public class LoginServlet extends HttpServlet {
                 {
                     out.write("nopass");
                 }
+            }
+            else
+            {
+                out.write("fail");
             }
         }
         else
