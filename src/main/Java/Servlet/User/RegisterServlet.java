@@ -1,12 +1,9 @@
 package Servlet.User;
 
 import POJO.User;
-import Service.LoginService.RegisterServeceImpl;
-import Service.LoginService.UserService;
-import Service.LoginService.UserServiceImpl;
+import Service.RegisterService.RegisterServeceImpl;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

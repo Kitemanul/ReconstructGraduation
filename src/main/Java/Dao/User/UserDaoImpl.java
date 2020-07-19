@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -39,6 +41,35 @@ public class UserDaoImpl implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public List<User> SelectAllUser(Connection con) {
+
+        PreparedStatement preparedStatement=null;
+        String sql="select * from UserManagement";
+        List<User> res=new ArrayList<>();
+        ResultSet rs=null;
+
+        try {
+            rs=BaseDao.Find(con,sql,preparedStatement,rs,new Object[]{});
+
+            while(rs.next())
+            {
+                User user=new User();
+                user.setUsername(rs.getString("username").trim());
+                user.setPermission(rs.getInt("permission"));
+                user.setMm(rs.getString("mm"));
+                user.setPass(rs.getInt("pass"));
+                res.add(user);
+            }
+
+
+            BaseDao.close(null,preparedStatement,rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
     @Override

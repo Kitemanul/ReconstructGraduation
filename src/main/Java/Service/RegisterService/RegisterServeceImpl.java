@@ -1,4 +1,4 @@
-package Service.LoginService;
+package Service.RegisterService;
 
 import Dao.BaseDao;
 import Dao.User.UserDao;

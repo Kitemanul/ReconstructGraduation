@@ -36,7 +36,15 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>SerachUnregisterServlet</servlet-name>
+        <servlet-class>Servlet.UserManagementServlet.SearchUnregisterUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SerachUnregisterServlet</servlet-name>
+        <url-pattern>/registeringUserdata</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>Filter</filter-name>

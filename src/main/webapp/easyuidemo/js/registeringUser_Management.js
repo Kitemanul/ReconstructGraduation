@@ -121,7 +121,7 @@
 			     
 		      $.ajax({  			
               type:"post",                               
-              url:"/work/registeringUserdatafromdb",  
+              url:"/registeringUserdata",
               data:{
                   "username":document.search_registeringuser.username.value,
                     
@@ -129,7 +129,7 @@
               dataType:"json",
               async:true,
               success:function(Data)
-              {   alert(Data.length);
+              {  
                   $('#datagrid-registeringuser').datagrid('loadData', Data);
               
               },
