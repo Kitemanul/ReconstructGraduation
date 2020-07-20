@@ -45,7 +45,7 @@
 
     <servlet>
         <servlet-name>CheckUnRegisterServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.CheckUnRegisterServlet</servlet-class>
+        <servlet-class>Servlet.UserManagement.CheckUnRegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CheckUnRegisterServlet</servlet-name>
@@ -54,7 +54,7 @@
 
     <servlet>
         <servlet-name>SerachUnregisterServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.SearchUnregisterUser</servlet-class>
+        <servlet-class>Servlet.UserManagement.SearchUnregisterUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerachUnregisterServlet</servlet-name>
@@ -63,7 +63,7 @@
     
     <servlet>
         <servlet-name>SearchUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.SearchUserData</servlet-class>
+        <servlet-class>Servlet.UserManagement.SearchUserData</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchUserServlet</servlet-name>
@@ -72,7 +72,7 @@
     
     <servlet>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.AddUserServlet</servlet-class>
+        <servlet-class>Servlet.UserManagement.AddUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddUserServlet</servlet-name>
@@ -81,7 +81,7 @@
 
     <servlet>
         <servlet-name>EditUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.EditUserServlet</servlet-class>
+        <servlet-class>Servlet.UserManagement.EditUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditUserServlet</servlet-name>
@@ -90,13 +90,48 @@
 
     <servlet>
         <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagementServlet.DeleteServlet</servlet-class>
+        <servlet-class>Servlet.UserManagement.DeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteUserServlet</servlet-name>
         <url-pattern>/RemoveUser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CellerSearchDataServlet</servlet-name>
+        <servlet-class>Servlet.Celler.CellerSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CellerSearchDataServlet</servlet-name>
+        <url-pattern>/SearchCellerData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CellerAddServlet</servlet-name>
+        <servlet-class>Servlet.Celler.AddCellerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CellerAddServlet</servlet-name>
+        <url-pattern>/AddCeller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditCellerServlet</servlet-name>
+        <servlet-class>Servlet.Celler.EditCellerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditCellerServlet</servlet-name>
+        <url-pattern>/EditCeller</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteCellerServlet</servlet-name>
+        <servlet-class>Servlet.Celler.DeleteCellerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCellerServlet</servlet-name>
+        <url-pattern>/RemoveCeller</url-pattern>
+    </servlet-mapping>
 
 
     <welcome-file-list>

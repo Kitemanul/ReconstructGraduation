@@ -5,7 +5,7 @@
 	function add(){
 		$.ajax({  			
             type:"post",                               
-            url:"/work/Add",  
+            url:"/AddCeller",
             data:{
                 "time1":document.formadd.time1.value,
                 "time0":document.formadd.time0.value,
@@ -34,7 +34,7 @@
 		var item = $('#datagrid-celler').datagrid('getSelected');
 		$.ajax({  			
             type:"post",                               
-            url:"/work/Edittt",  
+            url:"/EditCeller",
             data:{
             	"_time1":item.入窖时间,
                 "_time0":item.时间,
@@ -75,7 +75,7 @@
 				$.ajax({
 					 async:true,
 				     type:'post',
-					url:'/work/Remove',
+					url:'/RemoveCeller',
 					dataType:"text",
 					data:{
 		            	"_time1":items.入窖时间,
@@ -220,7 +220,7 @@
 			     
 			  $.ajax({  			
               type:"post",                               
-              url:"/work/Datafromdb",  
+              url:"/SearchCellerData",
               data:{
                   "time1":document.search.startime.value,
                   "time2":document.search.endtime.value,

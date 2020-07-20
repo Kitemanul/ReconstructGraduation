@@ -1,7 +1,7 @@
-package Servlet.UserManagementServlet;
+package Servlet.UserManagement;
 
-import Service.UserManagementService.CheckRegisterService;
-import Service.UserManagementService.CheckRegisterServiceImpl;
+import Service.UserManagementService.UserManagementService;
+import Service.UserManagementService.UserManagementServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,22 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
-public class CheckUnRegisterServlet extends HttpServlet {
+@WebServlet(name = "DeleteServlet")
+public class DeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setCharacterEncoding("UTF-8");
-        CheckRegisterService service=new CheckRegisterServiceImpl();
-        String username=request.getParameter("username");
+        response.setCharacterEncoding("utf-8");
+        String usernmae=request.getParameter("_username");
+        UserManagementService service=new UserManagementServiceImpl();
         int row=0;
-        row=service.Check(username);
+        row=service.DeleteUser(usernmae);
         PrintWriter writer=response.getWriter();
+
         if(row==1)
         {
-            writer.write("审核通过");
+            writer.write("删除成功");
         }
-        else {
-            writer.write("审核失败");
+        else
+        {
+            writer.write("删除失败");
         }
 
 

@@ -65,8 +65,7 @@
               type:"post",                               
               url:"/work/temperaturefromdb",  
               data:{
-                  
-             
+
                   "group":document.search.groupID.value,
                   "jar":document.search.jarID.value,
                   "cycle":document.search.cycleID.value,

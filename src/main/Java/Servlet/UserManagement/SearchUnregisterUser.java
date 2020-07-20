@@ -1,4 +1,4 @@
-package Servlet.UserManagementServlet;
+package Servlet.UserManagement;
 
 import POJO.User;
 import Service.UserManagementService.CheckRegisterService;

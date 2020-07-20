@@ -148,7 +148,7 @@ public class UserDaoImpl implements UserDao {
         String sql="delete from UserManagement where username=?";
 
         try {
-            row=BaseDao.Delete(con,sql,pre,new Object[]{username});
+            row=BaseDao.Update(con,sql,pre,new Object[]{username});
         } catch (SQLException e) {
             e.printStackTrace();
         }
