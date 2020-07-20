@@ -33,15 +33,35 @@ public class UserDaoImpl implements UserDao {
                     user.setPass(set.getInt("pass"));
                     user.setPrimary_key(set.getInt("primary_key"));
                 }
-
-                BaseDao.close(null,preparedStatement,set);
             } catch (SQLException e) {
                 e.printStackTrace();
+            }
+            finally {
+                BaseDao.close(null,preparedStatement,set);
             }
         }
 
         return user;
     }
+
+    @Override
+    public int UpdatePass(Connection con, String username) {
+        int res=0;
+        PreparedStatement preparedStatement=null;
+        String sql="update UserManagement set pass = 1  where username=?";
+        try {
+           res=BaseDao.Update(con,sql,preparedStatement,new Object[]{username});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,preparedStatement,null);
+        }
+
+
+        return res;
+    }
+
 
     @Override
     public List<User> SelectAllUser(Connection con) {
@@ -64,10 +84,11 @@ public class UserDaoImpl implements UserDao {
                 res.add(user);
             }
 
-
-            BaseDao.close(null,preparedStatement,rs);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,preparedStatement,rs);
         }
         return res;
     }
@@ -84,10 +105,12 @@ public class UserDaoImpl implements UserDao {
 
         try {
             row=BaseDao.Update(con,sql,preparedStatement,ob);
-            BaseDao.close(null,preparedStatement,null);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,preparedStatement,null);
         }
         return row;
     }

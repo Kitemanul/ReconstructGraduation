@@ -60,10 +60,11 @@ public class SearchUnregisterUser extends HttpServlet {
                 jsonObject.put("用户名",user.getUsername());
                 jsonObject.put("权限", user.getPermission());
                 jsonObject.put("审核状态", "待审核");
+                JSONArray res=new JSONArray();
+                res.add(jsonObject);
+                out.write(res.toString());
             }
-            JSONArray res=new JSONArray();
-            res.add(jsonObject);
-            out.write(res.toString());
+
 
         }
 

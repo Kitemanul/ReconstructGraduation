@@ -10,15 +10,17 @@
 		var item = $('#datagrid-registeringuser').datagrid('getSelected');
 		$.ajax({  			
             type:"post",                               
-            url:"/work/userpass",  
+            url:"/userpass",
             data:{
-            	"result":'pass',   
+
             	"username":document.formcheckuser.username.value,
                  },   
             dataType:"text",
             async:true,
             success:function(Data)
-            {   alert(Data);
+            {
+
+            	alert(Data);
                             
             },
             error:function()
@@ -129,7 +131,8 @@
               dataType:"json",
               async:true,
               success:function(Data)
-              {  
+              {
+
                   $('#datagrid-registeringuser').datagrid('loadData', Data);
               
               },

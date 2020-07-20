@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CheckRegisterService {
 
-    public boolean Check(User user);
+    public int Check(String username);
 
     public List<User> getAllUnRegisterUser();
 

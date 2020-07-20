@@ -13,5 +13,7 @@ public interface UserDao {
 
     public List<User> SelectAllUser(Connection con);
 
+    public int UpdatePass(Connection con,String username);
+
 
 }
