@@ -69,6 +69,19 @@ public class BaseDao {
 
     }
 
+    public static int Delete(Connection con,String sql,PreparedStatement pre,Object[] param) throws SQLException
+    {
+        pre=con.prepareStatement(sql);
+        for(int i=0;i<param.length;i++)
+        {
+            pre.setObject(i+1,param[i]);
+        }
+        int row=pre.executeUpdate();
+
+        return  row;
+
+    }
+
 
     public static void close(Connection con, PreparedStatement p, ResultSet rs)
     {

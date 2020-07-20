@@ -60,6 +60,44 @@
         <servlet-name>SerachUnregisterServlet</servlet-name>
         <url-pattern>/registeringUserdata</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <servlet-class>Servlet.UserManagementServlet.SearchUserData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <url-pattern>/Userdata</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddUserServlet</servlet-name>
+        <servlet-class>Servlet.UserManagementServlet.AddUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddUserServlet</servlet-name>
+        <url-pattern>/AddUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>Servlet.UserManagementServlet.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/EditUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>Servlet.UserManagementServlet.DeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/RemoveUser</url-pattern>
+    </servlet-mapping>
+
+
 
     <welcome-file-list>
         <welcome-file>/login.html</welcome-file>

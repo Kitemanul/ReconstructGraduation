@@ -45,6 +45,34 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> SelectUsersByRight(Connection con, int right) {
+        List<User> res=new ArrayList<>();
+        PreparedStatement preparedStatement=null;
+        ResultSet rs=null;
+        String sql="select * from UserManagement where permission =?";
+
+        try {
+            rs=BaseDao.Find(con,sql,preparedStatement,rs,new Object[]{right});
+            while(rs.next())
+            {
+                User user=new User();
+                user.setUsername(rs.getString("username").trim());
+                user.setPermission(rs.getInt("permission"));
+                user.setMm(rs.getString("mm"));
+                user.setPass(rs.getInt("pass"));
+                res.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,preparedStatement,rs);
+        }
+
+        return  res;
+    }
+
+    @Override
     public int UpdatePass(Connection con, String username) {
         int res=0;
         PreparedStatement preparedStatement=null;
@@ -91,6 +119,43 @@ public class UserDaoImpl implements UserDao {
             BaseDao.close(null,preparedStatement,rs);
         }
         return res;
+    }
+
+    @Override
+    public int UpdateUser(Connection con, User user,String username) {
+
+        PreparedStatement preparedStatement=null;
+        int row=0;
+        String sql="update UserManagement set username = ?,mm=?,permission=? where username=?";
+
+        try {
+            row=BaseDao.Update(con,sql,preparedStatement,new Object[]{user.getUsername(),user.getMm(),user.getPermission(),username});
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,preparedStatement,null);
+        }
+        return row;
+    }
+
+    @Override
+    public int DeleteUserbyUsername(Connection con, String username) {
+
+        PreparedStatement pre=null;
+        int row=0;
+        String sql="delete from UserManagement where username=?";
+
+        try {
+            row=BaseDao.Delete(con,sql,pre,new Object[]{username});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            BaseDao.close(null,pre,null);
+        }
+        return row;
     }
 
     @Override

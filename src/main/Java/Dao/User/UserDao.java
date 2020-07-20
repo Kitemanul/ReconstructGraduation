@@ -15,5 +15,13 @@ public interface UserDao {
 
     public int UpdatePass(Connection con,String username);
 
+    public List<User> SelectUsersByRight(Connection con,int right);
+
+    public int DeleteUserbyUsername(Connection con,String username);
+
+    public int UpdateUser(Connection con,User user,String username);
+
+
+
 
 }

@@ -11,7 +11,7 @@
 		{
 		$.ajax({  			
             type:"post",                               
-            url:"/work/Adduser",  
+            url:"/AddUser",
             data:{
                 "username":document.formadduser.username.value,
                 "password":document.formadduser.password.value,
@@ -41,7 +41,7 @@
 		var item = $('#datagrid-user').datagrid('getSelected');
 		$.ajax({  			
             type:"post",                               
-            url:"/work/Edituser",  
+            url:"/EditUser",
             data:{
             	"_username":item.用户名,
                
@@ -76,7 +76,7 @@
 				$.ajax({
 					 async:true,
 				     type:'post',
-					url:'/work/Removeuser',
+					url:'/RemoveUser',
 					dataType:"text",
 					data:{
 		            	"_username":items.用户名,
@@ -210,7 +210,7 @@
 			     
 			  $.ajax({  			
               type:"post",                               
-              url:"/work/Userdatafromdb",  
+              url:"/Userdata",
               data:{
                   "username":document.searchuser.username.value,
                   "right":document.searchuser.right.value,
@@ -219,7 +219,7 @@
               dataType:"json",
               async:true,
               success:function(Data)
-              {   alert(Data.length);
+              {
                   $('#datagrid-user').datagrid('loadData', Data);
               
               },
