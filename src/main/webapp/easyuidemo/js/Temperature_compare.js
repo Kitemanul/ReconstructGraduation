@@ -69,7 +69,7 @@
 		
 		  $.ajax({  			
               type:"post",                               
-              url:"/work/comparefromdb",  
+              url:"/TemperatureCompare",
               data:{
                   
                   "cycle":document.search.cycle.value,
