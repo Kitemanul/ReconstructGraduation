@@ -133,6 +133,15 @@
         <url-pattern>/RemoveCeller</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchTemperatureServlet</servlet-name>
+        <servlet-class>Servlet.Temperature.SearchTemperatureServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchTemperatureServlet</servlet-name>
+        <url-pattern>/SearchTemperature</url-pattern>
+    </servlet-mapping>
+
 
     <welcome-file-list>
         <welcome-file>/login.html</welcome-file>

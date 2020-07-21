@@ -96,10 +96,10 @@ public class CellerDaoImpl implements CellerDao {
                 while(set.next())
                 {
                     CellerInOut celler=new CellerInOut();
-                    celler.setTime(set.getTime("时间"));
+                    celler.setTime(set.getTimestamp("时间"));
                     celler.setPeriod(set.getInt("周期"));
-                    celler.setIntime(set.getTime("入窖时间"));
-                    celler.setOuttime(set.getTime("出窖时间"));
+                    celler.setIntime(set.getTimestamp("入窖时间"));
+                    celler.setOuttime(set.getTimestamp("出窖时间"));
                     celler.setJarid(set.getInt("罐号"));
                     celler.setGroupid(set.getInt("组号"));
                     res.add(celler);

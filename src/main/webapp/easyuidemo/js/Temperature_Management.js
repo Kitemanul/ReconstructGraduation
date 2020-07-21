@@ -63,7 +63,7 @@
 			  
 			  $.ajax({  			
               type:"post",                               
-              url:"/work/temperaturefromdb",  
+              url:"/SearchTemperature",
               data:{
 
                   "group":document.search.groupID.value,
