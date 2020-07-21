@@ -38,5 +38,29 @@ public class TemperatureDaoImpl implements TemperatureDao {
         return res;
     }
 
+    @Override
+    public List<Temperature> SearchErrorTemperature(Connection con, Object[] objects, String jar) {
 
+        PreparedStatement pre=null;
+        String sql="select 组号,时间,罐"+jar+" from dbo.温度数据1  where 组号 = ? order by 时间";
+        ResultSet set=null;
+        List<Temperature> res=new ArrayList<>();
+
+        try {
+            set=BaseDao.Find(con,sql,pre,set,objects);
+            while(set.next())
+            {
+                Temperature tem=new Temperature();
+                tem.setTemp(set.getFloat(3));
+                tem.setTime(set.getObject(2).toString());
+                tem.setGroupid(set.getInt(1));
+                res.add(tem);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.close(null,pre,null);
+        }
+        return res;
+    }
 }

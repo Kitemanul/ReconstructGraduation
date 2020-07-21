@@ -39,6 +39,18 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    public List<Temperature> SearchErrorTempearture(Temperature tem) {
+
+        Connection con=BaseDao.getConnection();
+
+        Object[] object= new Object[]{tem.getGroupid()};
+
+        List<Temperature> res=temperatureDao.SearchErrorTemperature(con,object,String.valueOf(tem.getJarid()));
+        BaseDao.close(con,null,null);
+        return res;
+    }
+
+    @Override
     public List<Temperature> SearchTempearture(int rate, Temperature tem) {
 
         Connection con= BaseDao.getConnection();

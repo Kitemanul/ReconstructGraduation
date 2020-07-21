@@ -61,7 +61,7 @@
 			
 			  $.ajax({  			
               type:"post",                               
-              url:"/work/errortemperaturefromdb",  
+              url:"/ErrorTemperatureSearch",
               data:{
                   
              
