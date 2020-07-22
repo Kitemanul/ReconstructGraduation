@@ -118,6 +118,8 @@ public class CellerDaoImpl implements CellerDao {
         return res;
     }
 
+
+
     @Override
     public int AddCeller(Connection con, CellerInOut celler) {
 

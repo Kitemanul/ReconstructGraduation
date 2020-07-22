@@ -43,5 +43,8 @@
     <mappers>
         <!-- resource要写成路径 -->
         <mapper class="Dao.User.UserMapper"/>
+        <mapper class="Dao.Celler.CellerMapper"/>
     </mappers>
+
+
 </configuration>

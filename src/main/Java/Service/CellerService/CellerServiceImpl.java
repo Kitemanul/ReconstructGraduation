@@ -2,9 +2,13 @@ package Service.CellerService;
 
 import Dao.BaseDao;
 import Dao.Celler.CellerDaoImpl;
+import Dao.Celler.CellerMapper;
 import POJO.CellerInOut;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CellerServiceImpl implements CellerService {
@@ -18,32 +22,34 @@ public class CellerServiceImpl implements CellerService {
 
     @Override
     public int DeleteCeller(CellerInOut outceller) {
-        Connection con=BaseDao.getConnection();
 
-        int row=cellerDao.DeleteCeller(con,outceller);
-
-        BaseDao.close(con,null,null);
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
+        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
+        int row= cellerMapper.DeleteCeller(outceller);
+        sqlSession.commit();
+        sqlSession.close();
         return row;
     }
 
     @Override
     public int EditCeller(CellerInOut outceller, CellerInOut newceller) {
-        Connection con=BaseDao.getConnection();
 
-        int row=cellerDao.EditCeller(con,outceller,newceller);
-
-        BaseDao.close(con,null,null);
-
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
+        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
+        int row= cellerMapper.EditCeller(outceller,newceller);
+        sqlSession.commit();
+        sqlSession.close();
         return row;
     }
 
     @Override
     public int AddCeller(CellerInOut celler) {
-        Connection con=BaseDao.getConnection();
 
-        int row=cellerDao.AddCeller(con,celler);
-
-        BaseDao.close(con,null,null);
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
+        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
+        int row= cellerMapper.AddCeller(celler);
+        sqlSession.commit();
+        sqlSession.close();
         return row;
     }
 
@@ -52,11 +58,11 @@ public class CellerServiceImpl implements CellerService {
 
         Connection con= BaseDao.getConnection();
 
-        List<CellerInOut> res=cellerDao.SelectAllCeller(con,condition,objects);
+        //List<CellerInOut> res=cellerDao.SelectAllCeller(con,condition,objects);
 
         BaseDao.close(con,null,null);
 
 
-        return res;
+        return new ArrayList<>();
     }
 }

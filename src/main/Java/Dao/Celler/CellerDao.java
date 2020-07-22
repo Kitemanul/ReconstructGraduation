@@ -3,6 +3,8 @@ package Dao.Celler;
 
 
 import POJO.CellerInOut;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ public interface CellerDao {
 
 
     public List<CellerInOut> SelectAllCeller(Connection con, String[] condition,Object[] objects);
+
 
     public int AddCeller(Connection con,CellerInOut celler);
 
