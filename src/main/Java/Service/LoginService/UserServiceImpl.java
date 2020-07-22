@@ -1,28 +1,27 @@
 package Service.LoginService;
 
 import Dao.BaseDao;
-import Dao.User.UserDao;
-import Dao.User.UserDaoImpl;
+import Dao.User.UserMapper;
 import POJO.User;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.sql.Connection;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDao userdao=null;
-    public UserServiceImpl()
-    {
-        userdao=new UserDaoImpl();
-    }
+
     @Override
     public User LoginUser(String username) {
-        Connection con=null;
+
+        SqlSession sqlSession=MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
         User user=null;
         try
         {
-            con= BaseDao.getConnection();
-            user=userdao.getUser(con,username);
+            user=userMapper.getUser(username);
         }
         catch (Exception e)
         {

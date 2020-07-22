@@ -1,8 +1,6 @@
 package Service.UserManagementService;
 
 import Dao.BaseDao;
-import Dao.User.UserDao;
-import Dao.User.UserDaoImpl;
 import POJO.User;
 
 import java.sql.Connection;

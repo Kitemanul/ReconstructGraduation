@@ -1,8 +1,6 @@
 package Service.UserManagementService;
 
 import Dao.BaseDao;
-import Dao.User.UserDao;
-import Dao.User.UserDaoImpl;
 import POJO.User;
 
 import java.sql.Connection;
@@ -62,7 +60,7 @@ public class UserManagementServiceImpl implements UserManagementService {
     public List<User> SearchaAllUser() {
         List<User> res=null;
         Connection con= BaseDao.getConnection();
-        res= userDao.SelectAllUser(con);
+        //res= userDao.SelectAllUser(con);
         BaseDao.close(con,null,null);
         return res;
     }

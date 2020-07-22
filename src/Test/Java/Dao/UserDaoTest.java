@@ -1,43 +1,37 @@
 package Dao;
 
+import Dao.User.UserMapper;
 import POJO.User;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.log4j.Logger;
 
 public class UserDaoTest {
 
-
+    static Logger logger=Logger.getLogger(UserDaoTest.class);
     @Test
     public void test()
     {
-        Connection con=BaseDao.getConnection();
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
 
-        PreparedStatement preparedStatement=null;
-        String sql="select * from UserManagement where pass=0 and permission=2";
-        List<User> res=new ArrayList<>();
-        ResultSet rs=null;
+        UserMapper userDao=sqlSession.getMapper(UserMapper.class);
 
-        try {
-            rs=BaseDao.Find(con,sql,preparedStatement,rs,new Object[]{});
+        User user=new User();
+        user.setUsername("122");
+        user.setMm("fdfd");
+        user.setPermission(2);
+        user.setPass(2);
 
-            while(rs.next())
-            {
-                User user=new User();
-                user.setUsername(rs.getString("username").trim());
-                user.setPermission(rs.getInt("permission"));
-                res.add(user);
-            }
+        //User usr=userDao.getUser(user);
+        //int row=userDao.InsertUser(user);
+        // int row=userDao.DeleteUserbyUsername("1221");
+        //List<User> list=userDao.SelectUsersByRight(1);
+        int row=userDao.UpdateUser(user,"1221");
 
-            BaseDao.close(null,preparedStatement,rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        sqlSession.commit();
+        sqlSession.close();
 
         return ;
 
