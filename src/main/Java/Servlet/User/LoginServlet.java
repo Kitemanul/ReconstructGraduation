@@ -1,8 +1,11 @@
 package Servlet.User;
 
 import Constant.Constant;
+import Dao.User.UserMapper;
 import POJO.User;
 import Service.LoginService.UserServiceImpl;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import javax.servlet.ServletException;
@@ -65,8 +68,11 @@ public class LoginServlet extends HttpServlet {
 
     @Test
     public void loginUser() {
-        UserServiceImpl service=new UserServiceImpl();
-        User user=service.LoginUser("admin");
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
+
+        UserMapper userMapper= sqlSession.getMapper(UserMapper.class);
+
+        User user=userMapper.getUser("admin");
 
         System.out.println(user.getMm());
 

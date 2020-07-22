@@ -5,27 +5,29 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 public class MyBatisUtil {
 
-    static private SqlSessionFactory sqlSessionFactory;
-
+    private static SqlSessionFactory sqlSessionFactory;
     static {
-        try{
-            String resource = "Mybatis-config.xml";
-            InputStream inputStream = Resources.getResourceAsStream(resource);
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        String name = "Mybatis-config.xml";
+
+        try {
+            InputStream in = Resources.getResourceAsStream(name);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
-    public static SqlSession openSqlsession()
+
+
+    public  static SqlSession getSqlSession()
     {
+
         return sqlSessionFactory.openSession();
     }
-
 
 }

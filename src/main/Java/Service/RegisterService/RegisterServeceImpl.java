@@ -1,6 +1,6 @@
 package Service.RegisterService;
 
-import Dao.BaseDao;
+
 import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
@@ -15,7 +15,7 @@ public class RegisterServeceImpl implements RegisterService {
     @Override
     public int Register(User user) {
 
-        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
 
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 
@@ -39,7 +39,7 @@ public class RegisterServeceImpl implements RegisterService {
 
     @Override
     public User getUser(String username) {
-        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
 
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 

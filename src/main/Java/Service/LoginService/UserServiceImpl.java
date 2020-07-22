@@ -1,6 +1,6 @@
 package Service.LoginService;
 
-import Dao.BaseDao;
+
 import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User LoginUser(String username) {
 
-        SqlSession sqlSession=MyBatisUtil.openSqlsession();
+        SqlSession sqlSession=MyBatisUtil.getSqlSession();
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 
         User user=null;
@@ -32,15 +32,6 @@ public class UserServiceImpl implements UserService {
         }
 
         return user;
-    }
-
-    @Test
-    public void loginUser() {
-        UserServiceImpl service=new UserServiceImpl();
-        User user=service.LoginUser("admin");
-
-        System.out.println(user.getMm());
-
     }
 
 

@@ -14,7 +14,7 @@ public class UserDaoTest {
     @Test
     public void test()
     {
-        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        SqlSession sqlSession= MyBatisUtil.getSqlSession();
 
         UserMapper userDao=sqlSession.getMapper(UserMapper.class);
 

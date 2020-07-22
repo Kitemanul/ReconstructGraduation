@@ -2,6 +2,7 @@ package Servlet.User;
 
 import POJO.User;
 import Service.RegisterService.RegisterServeceImpl;
+import Util.MD5Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
             user=new User();
             user.setPass(0);
             user.setUsername(username);
-            user.setMm(password);
+            user.setMm(MD5Utils.stringToMD5(password));
             user.setPermission(2);
             int row=servece.Register(user);
             if(row==1)

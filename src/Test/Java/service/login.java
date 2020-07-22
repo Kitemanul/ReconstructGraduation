@@ -11,7 +11,7 @@ public class login {
     @Test
     public void LoginUser() {
         String username="admin";
-        SqlSession sqlSession = MyBatisUtil.openSqlsession();
+        SqlSession sqlSession = MyBatisUtil.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         User user = null;
