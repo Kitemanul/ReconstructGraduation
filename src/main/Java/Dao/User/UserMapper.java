@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserMapper {
 
     @Select("select * from UserManagement where username=#{username}")
-    public User getUser(User user);
+    public User getUser(@Param("username")String username);
 
     @Insert("insert into UserManagement (username,mm,permission,pass) values(#{username},#{mm},#{permission},#{pass})")
     public int InsertUser(User user);

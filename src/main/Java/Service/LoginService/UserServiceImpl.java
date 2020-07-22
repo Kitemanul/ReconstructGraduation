@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         finally {
-            BaseDao.close(con,null,null);
+            sqlSession.close();
         }
 
         return user;

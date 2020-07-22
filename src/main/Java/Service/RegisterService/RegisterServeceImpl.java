@@ -1,30 +1,37 @@
 package Service.RegisterService;
 
 import Dao.BaseDao;
+import Dao.User.UserMapper;
 import POJO.User;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Connection;
 
 public class RegisterServeceImpl implements RegisterService {
 
-    private UserDao userdao=null;
 
-    public RegisterServeceImpl()
-    {
-        userdao=new UserDaoImpl();
-    }
 
     @Override
     public int Register(User user) {
-        Connection con=null;
+
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
         int row=0;
         try{
-            con= BaseDao.getConnection();
-            row=userdao.InsertUser(con,user);
+
+            row=userMapper.InsertUser(user);
+            sqlSession.commit();
         }
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+        finally {
+
+            sqlSession.close();
         }
         return row;
 
@@ -32,15 +39,21 @@ public class RegisterServeceImpl implements RegisterService {
 
     @Override
     public User getUser(String username) {
-        Connection con=null;
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
         User user=null;
         try{
-            con= BaseDao.getConnection();
-            user=userdao.getUser(con,username);
+            user=userMapper.getUser(username);
+            sqlSession.commit();;
         }
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+        finally {
+            sqlSession.close();
         }
         return user;
 

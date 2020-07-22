@@ -3,6 +3,7 @@ package Servlet.User;
 import Constant.Constant;
 import POJO.User;
 import Service.LoginService.UserServiceImpl;
+import org.junit.Test;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,7 @@ public class LoginServlet extends HttpServlet {
         User user=service.LoginUser(username);
         if(user!=null)
         {
+
             if(user.getMm().equals(pw))
             {
                 if(user.getPass()==1)
@@ -58,6 +60,15 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Test
+    public void loginUser() {
+        UserServiceImpl service=new UserServiceImpl();
+        User user=service.LoginUser("admin");
+
+        System.out.println(user.getMm());
 
     }
 }

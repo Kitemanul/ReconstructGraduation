@@ -1,7 +1,10 @@
 package Service.UserManagementService;
 
 import Dao.BaseDao;
+import Dao.User.UserMapper;
 import POJO.User;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,20 +12,15 @@ import java.util.List;
 
 public class CheckRegisterServiceImpl implements CheckRegisterService
 {
-    UserDao userDao=null;
-
-    public CheckRegisterServiceImpl()
-    {
-        userDao=new UserDaoImpl();
-    }
 
     @Override
     public User getUnRegisterUser(String username) {
-        Connection con=null;
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
         User user=null;
         try{
-            con=BaseDao.getConnection();
-            user=userDao.getUser(con,username);
+
+            user=userMapper.getUser(username);
             if(user.getPass()==0)
             {
                 return user;
@@ -33,7 +31,7 @@ public class CheckRegisterServiceImpl implements CheckRegisterService
             e.printStackTrace();
         }
         finally {
-            BaseDao.close(con,null,null);
+            sqlSession.close();
         }
         return null;
 
@@ -42,11 +40,13 @@ public class CheckRegisterServiceImpl implements CheckRegisterService
     @Override
     public List<User> getAllUnRegisterUser() {
         List<User> res=new ArrayList<>();
-        Connection con=null;
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 
         try {
-            con= BaseDao.getConnection();
-            List<User> temp=userDao.SelectAllUser(con);
+
+            List<User> temp=userMapper.SelectAllUser();
 
             for(User user:temp)
             {
@@ -61,7 +61,7 @@ public class CheckRegisterServiceImpl implements CheckRegisterService
             e.printStackTrace();
         }
         finally {
-            BaseDao.close(con,null,null);
+            sqlSession.close();
         }
 
         return res;
@@ -70,10 +70,11 @@ public class CheckRegisterServiceImpl implements CheckRegisterService
     @Override
     public int Check(String username) {
         int res=0;
-        Connection con=BaseDao.getConnection();
-        UserDao userDao=new UserDaoImpl();
-        res=userDao.UpdatePass(con,username);
-        BaseDao.close(con,null,null);
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
+        res=userMapper.UpdatePass(username);
+        sqlSession.close();
 
         return res;
     }

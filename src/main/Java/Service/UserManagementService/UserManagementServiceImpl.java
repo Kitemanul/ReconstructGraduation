@@ -1,23 +1,23 @@
 package Service.UserManagementService;
 
 import Dao.BaseDao;
+import Dao.User.UserMapper;
 import POJO.User;
+import Util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Connection;
 import java.util.List;
 
 public class UserManagementServiceImpl implements UserManagementService {
 
-    UserDao userDao=null;
-
-    public UserManagementServiceImpl()
-    {
-        userDao=new UserDaoImpl();
-    }
 
 
     @Override
     public User SearchaUsersByRightUsername(String username, int permission) {
+
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 
         User user=this.SearchUser(username);
         if(user==null)
@@ -39,10 +39,14 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public List<User> SearchaUsersByRight(int right) {
 
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
         List<User> res=null;
         Connection con= BaseDao.getConnection();
-        res= userDao.SelectUsersByRight(con,right);
-        BaseDao.close(con,null,null);
+        res= userMapper.SelectUsersByRight(right);
+
+        sqlSession.close();;
         return res;
 
     }
@@ -50,9 +54,11 @@ public class UserManagementServiceImpl implements UserManagementService {
     @Override
     public User SearchUser(String username) {
 
-        Connection con=BaseDao.getConnection();
-        User user=userDao.getUser(con,username);
-        BaseDao.close(con,null,null);
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+
+        User user=userMapper.getUser(username);
+        sqlSession.close();;
         return user;
     }
 
@@ -67,31 +73,37 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public int UpdateUser(User user,String username) {
-        Connection con=BaseDao.getConnection();
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
         int row=0;
-        row=userDao.UpdateUser(con,user,username);
-        BaseDao.close(con,null,null);
+        row=userMapper.UpdateUser(user,username);
+
+        sqlSession.close();
         return row;
     }
 
     @Override
     public int DeleteUser(String username) {
 
-        Connection con=BaseDao.getConnection();
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
         int row=0;
-        row=userDao.DeleteUserbyUsername(con,username);
-        BaseDao.close(con,null,null);
+        row=userMapper.DeleteUserbyUsername(username);
+        sqlSession.close();
         return row;
     }
 
     @Override
     public int InsertUser(User user) {
 
-        Connection con=BaseDao.getConnection();
+        SqlSession sqlSession= MyBatisUtil.openSqlsession();
+
+        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
         int row=0;
 
-        row=userDao.InsertUser(con,user);
-        BaseDao.close(con,null,null);
+        row=userMapper.InsertUser(user);
+        sqlSession.close();
         return row;
     }
 }
