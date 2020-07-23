@@ -10,5 +10,5 @@ public interface TemperatureService {
 
     public List<WorkShop> SearchTempearture(int rate, CellerInOut in);
 
-    public List<Temperature> SearchErrorTempearture(Temperature tem);
+    public List<WorkShop> SearchErrorTempearture(WorkShop workShop);
 }

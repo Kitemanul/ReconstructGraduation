@@ -52,7 +52,7 @@ public class SearchTemperatureServlet extends HttpServlet {
             {
                 JSONObject jsonObject=new JSONObject();
                 jsonObject.put("时间", DateUtils.Date2String(t.getTime()));
-                jsonObject.put("温度",t.getTeperatrue());
+                jsonObject.put("温度",t.getTemperature(celler.getJarid()));
                 jsonObject.put("罐号",jar);
                 jsonObject.put("组号",group);
                 jsonObject.put("周期",cycle);

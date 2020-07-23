@@ -1,42 +1,29 @@
 package Service.TemperatureService;
 
-import Dao.BaseDao;
-import Dao.Celler.CellerDao;
-import Dao.Celler.CellerDaoImpl;
 import Dao.Celler.CellerMapper;
-import Dao.Temperature.TemperatureDao;
-import Dao.Temperature.TemperatureDaoImpl;
 import Dao.Temperature.TemperatureMapper;
 import POJO.CellerInOut;
-import POJO.Temperature;
 import POJO.WorkShop;
 import Util.DateUtils;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class TemperatureServiceImpl implements TemperatureService {
 
-    TemperatureDao temperatureDao=null;
-    public TemperatureServiceImpl()
-    {
-        temperatureDao=new TemperatureDaoImpl();
-    }
 
-    public static float getRate_of_change(List<WorkShop> list,int n,int i) throws SQLException
+
+    public static float getRate_of_change(List<WorkShop> list,int n,int i,int jar) throws SQLException
     {   float rate=0;
-        float Temperature=list.get(i).getTeperatrue();
+        float Temperature=list.get(i).getTemperature(jar);
         int currow=i;
         if((i-n*2)>0)
         {
-            rate=(Temperature-list.get(i-n*2).getTeperatrue());
+            rate=(Temperature-list.get(i-n*2).getTemperature(jar));
             return (float)(Math.round(rate*10000))/10000;
         }
         else
@@ -47,14 +34,17 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public List<Temperature> SearchErrorTempearture(Temperature tem) {
+    public List<WorkShop> SearchErrorTempearture(WorkShop workShop) {
 
-        Connection con=BaseDao.getConnection();
+        SqlSession sqlSession=MyBatisUtil.getSqlSession();
+        TemperatureMapper temperatureMapper=sqlSession.getMapper(TemperatureMapper.class);
 
-        Object[] object= new Object[]{tem.getGroupid()};
+        HashMap<String,String> map=new HashMap<>();
+        map.put("jarid",workShop.getJarid());
+        map.put("groupid","'"+String.valueOf(workShop.getGroupid())+"'");
+        List<WorkShop> res=temperatureMapper.SearchErrorTemperature(map);
 
-        List<Temperature> res=temperatureDao.SearchErrorTemperature(con,object,String.valueOf(tem.getJarid()));
-        BaseDao.close(con,null,null);
+        sqlSession.close();
         return res;
     }
 
@@ -75,17 +65,19 @@ public class TemperatureServiceImpl implements TemperatureService {
         }
 
         HashMap<String,String> map=new HashMap();
-        map.put("groupid",String.valueOf(in.getGroupid()));
+        map.put("groupid","'"+String.valueOf(in.getGroupid())+"'");
         map.put("jarid","罐"+String.valueOf(in.getJarid()));
         map.put("intime", "'"+DateUtils.Date2String(list.get(0).getIntime())+"'");
         map.put("outtime", "'"+DateUtils.Date2String(list.get(0).getOuttime())+"'");
+
+
 
         List<WorkShop> res=temperatureMapper.SearchTemperature(map);
 
         try {
         for(int i=0;i<res.size();i++)
         {
-            res.get(i).setRate(getRate_of_change(res,rate,i));
+            res.get(i).setRate(getRate_of_change(res,rate,i,in.getJarid()));
         }
         } catch (SQLException e) {
             e.printStackTrace();

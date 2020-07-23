@@ -1,21 +1,15 @@
 package Dao;
 
-import Dao.Celler.CellerDao;
-import Dao.Celler.CellerDaoImpl;
+import Dao.Celler.CellerMapper;
 import Dao.Temperature.TemperatureMapper;
 import POJO.CellerInOut;
-import POJO.User;
 import POJO.WorkShop;
-import Util.DateUtils;
+import Service.TemperatureService.TemperatureService;
+import Service.TemperatureService.TemperatureServiceImpl;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,20 +21,33 @@ public class TemperatureDaoTest {
 
         SqlSession sqlSession= MyBatisUtil.getSqlSession();
         TemperatureMapper temperatureMapper=sqlSession.getMapper(TemperatureMapper.class);
-        WorkShop workshop=new WorkShop();
-        workshop.setGroupid(1);
-        workshop.setJarid("'罐2'");
+        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
+
+
         CellerInOut celler=new CellerInOut();
-        celler.setIntime(DateUtils.String2Date("2010-11-24 11:52:45.000"));
-        celler.setOuttime(DateUtils.String2Date("2020-11-24 11:52:45.000"));
+        celler.setGroupid(1);
+        celler.setJarid(2);
+        celler.setPeriod(1);
+
+        List<CellerInOut> list=cellerMapper.SelectAllCeller(celler);
 
         HashMap<String,String> map=new HashMap();
-        map.put("jarid","'罐2'");
-        map.put("intime","'2010-11-24 11:52:45.000'");
-        map.put("outtime","");
-        map.put("groupid","'2'");
+
+
+
+        map.put("jarid","罐2");
+        map.put("groupid","'1'");
+        map.put("intime","'2015-04-18 04:58:28.000'");
+        map.put("outtime","'2015-06-27 04:26:38.000'");
+
+
+
 
         List<WorkShop> s=temperatureMapper.SearchTemperature(map);
+        for (WorkShop l:s)
+        {
+            System.out.println(l.toString());
+        }
 
 
         return ;
@@ -48,4 +55,26 @@ public class TemperatureDaoTest {
 
 
     }
+
+    @Test
+    public void errortest()
+    {
+
+
+        TemperatureService service=new TemperatureServiceImpl();
+
+        WorkShop workShop=new WorkShop();
+        workShop.setJarid("罐1");
+        workShop.setGroupid(Integer.valueOf(2));
+        List<WorkShop> list=service.SearchErrorTempearture(workShop);
+
+        for (WorkShop l:list)
+        {
+            System.out.println(l.toString());
+        }
+
+        return;
+    }
+
+
 }

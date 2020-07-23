@@ -13,5 +13,5 @@ public interface TemperatureMapper {
 
     List<WorkShop> SearchTemperature(@Param("map") HashMap<String,String> map);
 
-    List<Temperature> SearchErrorTemperature(Object[] objects,String jar);
+    List<WorkShop> SearchErrorTemperature(@Param("map") HashMap<String,String> map);
 }

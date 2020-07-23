@@ -1,23 +1,14 @@
 package Service.CellerService;
 
-import Dao.BaseDao;
-import Dao.Celler.CellerDaoImpl;
 import Dao.Celler.CellerMapper;
 import POJO.CellerInOut;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CellerServiceImpl implements CellerService {
-    private CellerDaoImpl cellerDao;
 
-    public CellerServiceImpl()
-    {
-        cellerDao=new CellerDaoImpl();
-    }
 
 
     @Override

@@ -1,8 +1,10 @@
 package Servlet.Temperature;
 
 import POJO.Temperature;
+import POJO.WorkShop;
 import Service.TemperatureService.TemperatureService;
 import Service.TemperatureService.TemperatureServiceImpl;
+import Util.DateUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -27,19 +29,19 @@ public class ErrorTemperatureSearchServlet extends HttpServlet {
 
             TemperatureService service=new TemperatureServiceImpl();
 
-            Temperature tem=new Temperature();
-            tem.setGroupid(Integer.valueOf(group));
-            tem.setJarid(Integer.valueOf(jar));
-            List<Temperature> list=service.SearchErrorTempearture(tem);
+            WorkShop workShop=new WorkShop();
+            workShop.setJarid("罐"+jar);
+            workShop.setGroupid(Integer.valueOf(group));
+            List<WorkShop> list=service.SearchErrorTempearture(workShop);
 
             JSONArray jsonArray=new JSONArray();
-            for(Temperature t:list)
+            for(WorkShop t:list)
             {
                 JSONObject jsonObject=new JSONObject();
-                jsonObject.put("时间",t.getTime());
+                jsonObject.put("时间", DateUtils.Date2String(t.getTime()));
                 jsonObject.put("组号",group);
                 jsonObject.put("罐号",jar);
-                jsonObject.put("温度",t.getTemp());
+                jsonObject.put("温度",t.getTemperature(Integer.valueOf(jar)));
                 jsonArray.add(jsonObject);
             }
 

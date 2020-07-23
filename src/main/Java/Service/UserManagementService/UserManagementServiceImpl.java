@@ -1,6 +1,5 @@
 package Service.UserManagementService;
 
-import Dao.BaseDao;
 import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
@@ -44,7 +43,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
 
         List<User> res=null;
-        Connection con= BaseDao.getConnection();
+
         res= userMapper.SelectUsersByRight(right);
 
         sqlSession.close();;
