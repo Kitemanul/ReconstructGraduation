@@ -44,6 +44,7 @@
         <!-- resource要写成路径 -->
         <mapper class="Dao.User.UserMapper"/>
         <mapper class="Dao.Celler.CellerMapper"/>
+        <mapper class="Dao.Temperature.TemperatureMapper"/>
     </mappers>
 
 

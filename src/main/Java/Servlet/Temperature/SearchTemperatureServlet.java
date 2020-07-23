@@ -1,8 +1,11 @@
 package Servlet.Temperature;
 
+import POJO.CellerInOut;
 import POJO.Temperature;
+import POJO.WorkShop;
 import Service.TemperatureService.TemperatureService;
 import Service.TemperatureService.TemperatureServiceImpl;
+import Util.DateUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -29,28 +32,34 @@ public class SearchTemperatureServlet extends HttpServlet {
         String rate=request.getParameter("rate");
 
 
+        WorkShop workShop=new WorkShop();
+        CellerInOut celler=new CellerInOut();
+        celler.setJarid(Integer.valueOf(jar));
+        celler.setGroupid(Integer.valueOf(group));
+        celler.setPeriod(Integer.valueOf(cycle));
+
         TemperatureService service=new TemperatureServiceImpl();
-        Temperature tem=new Temperature();
-        tem.setGroupid(Integer.valueOf(group));
-        tem.setJarid(Integer.valueOf(jar));
-        tem.setCycle(Integer.valueOf(cycle));
-        List<Temperature> res=service.SearchTempearture(Integer.valueOf(rate),tem);
+        List<WorkShop> res=service.SearchTempearture(Integer.valueOf(rate),celler);
 
         JSONArray jsonArray=new JSONArray();
 
         PrintWriter writer=response.getWriter();
 
-        for(Temperature t:res)
-        {
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("时间",t.getTime());
-            jsonObject.put("温度",t.getTemp());
-            jsonObject.put("罐号",t.getJarid());
-            jsonObject.put("组号",t.getGroupid());
-            jsonObject.put("周期",t.getCycle());
-            jsonObject.put("变化率",t.getRate());
-            jsonArray.add(jsonObject);
 
+        if(res.size()!=0)
+        {
+            for(WorkShop t:res)
+            {
+                JSONObject jsonObject=new JSONObject();
+                jsonObject.put("时间", DateUtils.Date2String(t.getTime()));
+                jsonObject.put("温度",t.getTeperatrue());
+                jsonObject.put("罐号",jar);
+                jsonObject.put("组号",group);
+                jsonObject.put("周期",cycle);
+                jsonObject.put("变化率",t.getRate());
+                jsonArray.add(jsonObject);
+
+            }
         }
         writer.write(jsonArray.toString());
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CellerService {
 
-    public List<CellerInOut> SearchCeller(String[] condition,Object[] objects);
+    public List<CellerInOut> SearchCeller(CellerInOut celler);
 
     public int AddCeller(CellerInOut celler);
 

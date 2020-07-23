@@ -21,5 +21,5 @@ public interface CellerMapper {
     public int EditCeller(@Param("oldceller")CellerInOut oudceller, @Param("newceller")CellerInOut newceller);
 
 
-
+    public List<CellerInOut> SelectAllCeller(CellerInOut celler);
 }

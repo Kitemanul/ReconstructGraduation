@@ -50,8 +50,16 @@ public class CellerDaoTest {
         SqlSession sqlSession= MyBatisUtil.getSqlSession();
 
         CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
-        cellerMapper.AddCeller(celler);
-        int row =cellerMapper.EditCeller(celler,nceller);
+        //cellerMapper.AddCeller(celler);
+       // int row =cellerMapper.EditCeller(celler,nceller);
+        CellerInOut c=new CellerInOut();
+        c.setPeriod(-1);
+        List<CellerInOut> list=cellerMapper.SelectAllCeller(celler);
+
+        for(CellerInOut celler1:list)
+        {
+            System.out.println(celler.toString());
+        }
 
         sqlSession.commit();
         sqlSession.close();;

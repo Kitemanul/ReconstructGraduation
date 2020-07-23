@@ -54,15 +54,17 @@ public class CellerServiceImpl implements CellerService {
     }
 
     @Override
-    public List<CellerInOut> SearchCeller(String[] condition,Object[] objects) {
+    public List<CellerInOut> SearchCeller(CellerInOut celler) {
 
-        Connection con= BaseDao.getConnection();
+        List<CellerInOut> res=null;
+        SqlSession sqlSession=MyBatisUtil.getSqlSession();
 
-        //List<CellerInOut> res=cellerDao.SelectAllCeller(con,condition,objects);
+        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
 
-        BaseDao.close(con,null,null);
+        res=cellerMapper.SelectAllCeller(celler);
 
+        sqlSession.close();
 
-        return new ArrayList<>();
+        return res;
     }
 }

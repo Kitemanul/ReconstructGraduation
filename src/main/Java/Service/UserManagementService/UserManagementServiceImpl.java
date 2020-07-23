@@ -81,6 +81,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         int row=0;
         row=userMapper.UpdateUser(user,username);
 
+        sqlSession.commit();
         sqlSession.close();
         return row;
     }
@@ -93,6 +94,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
         int row=0;
         row=userMapper.DeleteUserbyUsername(username);
+        sqlSession.commit();
         sqlSession.close();
         return row;
     }
@@ -106,6 +108,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         int row=0;
 
         row=userMapper.InsertUser(user);
+        sqlSession.commit();
         sqlSession.close();
         return row;
     }
