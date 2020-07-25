@@ -14,8 +14,8 @@
             url:"/AddUser",
             data:{
                 "username":document.formadduser.username.value,
-                "password":document.formadduser.password.value,
-                "right":document.formadduser.right.value
+                "mm":document.formadduser.password.value,
+                "permission":document.formadduser.right.value
                                  },   
             dataType:"text",
             async:true,
@@ -48,7 +48,7 @@
                 
                 "username":document.formedituser.username.value,
                 "password":document.formedituser.password.value,
-                "right":document.formedituser.right.value,              
+                "permission":document.formedituser.right.value,
              
                  },   
             dataType:"text",
@@ -79,19 +79,17 @@
 					url:'/RemoveUser',
 					dataType:"text",
 					data:{
-		            	"_username":items.用户名,
+		            	"username":items.用户名,
 		              
 		                
 		                 },
 					success:function(data){
-						if(data=='删除成功'){
-							$.messager.alert('提示信息','删除成功');		
-						}
-						else
-						{
-							$.messager.alert('提示信息','删除失败');		
-						}
-					}	
+						alert(data);
+					},
+					error:function () {
+					 	alert("删除失败！");
+
+                    }
 				});
 			}	
 		});
@@ -213,7 +211,7 @@
               url:"/Userdata",
               data:{
                   "username":document.searchuser.username.value,
-                  "right":document.searchuser.right.value,
+                  "permission":document.searchuser.right.value,
                
                    },   
               dataType:"json",

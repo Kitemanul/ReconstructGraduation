@@ -1,172 +1,48 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
 
-<web-app>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+          version="4.0">
 
     <!--   "(icon?,display-name?,description?,distributable?,context-param*,filter*,filter-mapping*,listener*,servlet*,servlet-mapping*,session-config?,mime-mapping*,welcome-file-list?,error-page*,taglib*,resource-env-ref*,resource-ref*,security-constraint*,login-config?,security-role*,env-entry*,ejb-ref*,ejb-local-ref*)" -->
 
-    <context-param>
-        <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>Mybatis-config.xml</param-value>
-    </context-param>
+
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:ApplicationContext.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <filter>
-        <filter-name>Filter</filter-name>
-        <filter-class>Servlet.Filter.Filter</filter-class>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>Filter</filter-name>
-        <url-pattern>/easyuidemo/HTML/*</url-pattern>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/* </url-pattern>
     </filter-mapping>
-
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>Servlet.User.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>Servlet.User.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>Servlet.User.RegisterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CheckUnRegisterServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.CheckUnRegisterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CheckUnRegisterServlet</servlet-name>
-        <url-pattern>/userpass</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SerachUnregisterServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.SearchUnregisterUser</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SerachUnregisterServlet</servlet-name>
-        <url-pattern>/registeringUserdata</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>SearchUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.SearchUserData</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SearchUserServlet</servlet-name>
-        <url-pattern>/Userdata</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.AddUserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddUserServlet</servlet-name>
-        <url-pattern>/AddUser</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>EditUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.EditUserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EditUserServlet</servlet-name>
-        <url-pattern>/EditUser</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>Servlet.UserManagement.DeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <url-pattern>/RemoveUser</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CellerSearchDataServlet</servlet-name>
-        <servlet-class>Servlet.Celler.CellerSearchServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CellerSearchDataServlet</servlet-name>
-        <url-pattern>/SearchCellerData</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CellerAddServlet</servlet-name>
-        <servlet-class>Servlet.Celler.AddCellerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CellerAddServlet</servlet-name>
-        <url-pattern>/AddCeller</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>EditCellerServlet</servlet-name>
-        <servlet-class>Servlet.Celler.EditCellerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EditCellerServlet</servlet-name>
-        <url-pattern>/EditCeller</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>DeleteCellerServlet</servlet-name>
-        <servlet-class>Servlet.Celler.DeleteCellerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DeleteCellerServlet</servlet-name>
-        <url-pattern>/RemoveCeller</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SearchTemperatureServlet</servlet-name>
-        <servlet-class>Servlet.Temperature.SearchTemperatureServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SearchTemperatureServlet</servlet-name>
-        <url-pattern>/SearchTemperature</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>TemperatureCompareServlet</servlet-name>
-        <servlet-class>Servlet.Temperature.TemperatureCompareServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TemperatureCompareServlet</servlet-name>
-        <url-pattern>/TemperatureCompare</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ErrorTemperatureServlet</servlet-name>
-        <servlet-class>Servlet.Temperature.ErrorTemperatureSearchServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ErrorTemperatureServlet</servlet-name>
-        <url-pattern>/ErrorTemperatureSearch</url-pattern>
-    </servlet-mapping>
-
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
 
     <welcome-file-list>
         <welcome-file>/login.html</welcome-file>
     </welcome-file-list>
+
+
 
 </web-app>

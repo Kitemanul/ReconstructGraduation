@@ -6,13 +6,7 @@ import java.util.List;
 
 public interface UserManagementService {
 
-    public List<User> SearchaAllUser();
-
-    public User SearchUser(String username);
-
-    public List<User> SearchaUsersByRight(int right);
-
-    public User SearchaUsersByRightUsername(String username,int permission);
+    public List<User> SearchaUsers(User user);
 
     public int InsertUser(User user);
 

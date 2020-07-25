@@ -4,111 +4,39 @@ import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.util.List;
 
+@Service
 public class UserManagementServiceImpl implements UserManagementService {
 
-
-
-    @Override
-    public User SearchaUsersByRightUsername(String username, int permission) {
-
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        User user=this.SearchUser(username);
-        if(user==null)
-        {
-            return null;
-        }
-        else {
-            if(user.getPermission()==permission)
-            {
-                return user;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
+    @Autowired
+    UserMapper userMapper;
 
     @Override
-    public List<User> SearchaUsersByRight(int right) {
-
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        List<User> res=null;
-
-        res= userMapper.SelectUsersByRight(right);
-
-        sqlSession.close();;
-        return res;
-
-    }
-
-    @Override
-    public User SearchUser(String username) {
-
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        User user=userMapper.getUser(username);
-        sqlSession.close();;
-        return user;
-    }
-
-    @Override
-    public List<User> SearchaAllUser() {
-        List<User> res=null;
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        res= userMapper.SelectAllUser();
-        sqlSession.close();
-        return res;
+    public List<User> SearchaUsers(User user) {
+        return userMapper.getUsers(user);
     }
 
     @Override
     public int UpdateUser(User user,String username) {
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-        int row=0;
-        row=userMapper.UpdateUser(user,username);
 
-        sqlSession.commit();
-        sqlSession.close();
-        return row;
+        return userMapper.UpdateUser(user,username);
     }
 
     @Override
     public int DeleteUser(String username) {
 
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-        int row=0;
-        row=userMapper.DeleteUserbyUsername(username);
-        sqlSession.commit();
-        sqlSession.close();
-        return row;
+        return userMapper.DeleteUserbyUsername(username);
     }
 
     @Override
     public int InsertUser(User user) {
 
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
+       return userMapper.InsertUser(user);
 
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-        int row=0;
-
-        row=userMapper.InsertUser(user);
-        sqlSession.commit();
-        sqlSession.close();
-        return row;
     }
 }

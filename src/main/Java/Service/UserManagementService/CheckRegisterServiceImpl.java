@@ -5,78 +5,35 @@ import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CheckRegisterServiceImpl implements CheckRegisterService
 {
+    @Autowired
+    UserMapper userMapper;
 
     @Override
-    public User getUnRegisterUser(String username) {
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-        User user=null;
-        try{
-
-            user=userMapper.getUser(username);
-            if(user.getPass()==0)
-            {
-                return user;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally {
-            sqlSession.close();
-        }
-        return null;
-
-    }
-
-    @Override
-    public List<User> getAllUnRegisterUser() {
+    public List<User> getAllUnRegisterUser(User user) {
         List<User> res=new ArrayList<>();
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        try {
-
-            List<User> temp=userMapper.SelectAllUser();
-
-            for(User user:temp)
+        List<User> temp=userMapper.getUsers(user);
+        for(User u:temp)
+        {
+            if(u.getPass()==0)
             {
-                if(user.getPass()==0)
-                {
-                    res.add(user);
-                }
+                res.add(u);
             }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally {
-            sqlSession.close();
-        }
-
         return res;
     }
 
     @Override
     public int Check(String username) {
-        int res=0;
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        res=userMapper.UpdatePass(username);
-        sqlSession.commit();
-        sqlSession.close();
-
-        return res;
+        return userMapper.UpdatePass(username);
     }
 }

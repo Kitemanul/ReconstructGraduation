@@ -9,7 +9,11 @@ import java.util.List;
 
 public class CellerServiceImpl implements CellerService {
 
+    CellerMapper cellerMapper;
 
+    public void setCellerMapper(CellerMapper cellerMapper) {
+        this.cellerMapper = cellerMapper;
+    }
 
     @Override
     public int DeleteCeller(CellerInOut outceller) {

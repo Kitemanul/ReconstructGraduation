@@ -7,6 +7,7 @@ import POJO.WorkShop;
 import Util.DateUtils;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,8 @@ import java.util.List;
 
 public class TemperatureServiceImpl implements TemperatureService {
 
-
+    @Autowired
+    TemperatureMapper temperatureMapper;
 
     public static float getRate_of_change(List<WorkShop> list,int n,int i,int jar) throws SQLException
     {   float rate=0;

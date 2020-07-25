@@ -1,7 +1,6 @@
 package Servlet.Temperature;
 
 import POJO.CellerInOut;
-import POJO.Temperature;
 import POJO.WorkShop;
 import Service.TemperatureService.TemperatureService;
 import Service.TemperatureService.TemperatureServiceImpl;

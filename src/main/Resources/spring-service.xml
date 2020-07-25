@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+      <!--扫描service下的包-->
+
+      <context:component-scan base-package="Service"/>
+
+
+     <!--注册业务-->
+      <bean id="CellerServiceImpl" class="Service.CellerService.CellerServiceImpl">
+          <property name="cellerMapper" ref="cellerMapper"/>
+      </bean>
+      <bean id="UserServiceImpl" class="Service.LoginService.UserServiceImpl">
+          <property name="UserMapper" ref="userMapper"/>
+      </bean>
+
+      <!--声明式事务配置-->
+      <bean id="TransactionManageer" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+          <property name="dataSource" ref="dataSource"/>
+      </bean>
+
+       <!--注册AOP-->
+
+</beans>

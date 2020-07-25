@@ -9,7 +9,7 @@ public interface CheckRegisterService {
 
     public int Check(String username);
 
-    public List<User> getAllUnRegisterUser();
+    public List<User> getAllUnRegisterUser(User user);
 
-    public User getUnRegisterUser(String username);
+   // public User getUnRegisterUser(String username);
 }

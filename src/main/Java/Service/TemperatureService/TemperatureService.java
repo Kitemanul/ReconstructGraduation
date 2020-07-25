@@ -1,7 +1,6 @@
 package Service.TemperatureService;
 
 import POJO.CellerInOut;
-import POJO.Temperature;
 import POJO.WorkShop;
 
 import java.util.List;

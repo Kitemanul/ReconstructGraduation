@@ -1,11 +1,8 @@
 package Dao.Temperature;
 
-import POJO.CellerInOut;
-import POJO.Temperature;
 import POJO.WorkShop;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 

@@ -5,35 +5,24 @@ import Dao.User.UserMapper;
 import POJO.User;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Test;
+
 
 import java.sql.Connection;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
+    UserMapper userMapper;
+
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public User LoginUser(String username) {
 
-        SqlSession sqlSession=MyBatisUtil.getSqlSession();
-        UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
-
-        User user=null;
-        try
-        {
-            user=userMapper.getUser(username);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally {
-            sqlSession.close();
-        }
-
-        return user;
+        return userMapper.getUserbyName(username);
     }
-
 
 
 }
