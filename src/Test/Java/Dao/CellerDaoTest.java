@@ -2,52 +2,35 @@ package Dao;
 
 import Dao.Celler.CellerMapper;
 import POJO.CellerInOut;
+import Service.CellerService.CellerService;
 import Util.DateUtils;
 import Util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-
+@RunWith(SpringJUnit4ClassRunner.class)// SpringJUnit支持，由此引入Spring-Test框架支持！
+@ContextConfiguration({"classpath:ApplicationContext.xml"})//用于加载bean
 public class CellerDaoTest {
 
+    @Autowired
+    CellerService cellerService;
     @Test
     public void test()
     {
        CellerInOut celler=new CellerInOut();
-       celler.setTime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
-       celler.setIntime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
-       celler.setOuttime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
-       celler.setPeriod(1);
-       celler.setJarid(2);
-       celler.setGroupid(100);
-       celler.setEtime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
 
-        CellerInOut nceller=new CellerInOut();
-        nceller.setTime(DateUtils.String2Date("2014-11-18 08:45:36.000"));
-        nceller.setIntime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
-        nceller.setOuttime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
-        nceller.setPeriod(1);
-        nceller.setJarid(2);
-        nceller.setGroupid(100);
-        nceller.setEtime(DateUtils.String2Date("2014-11-17 08:45:36.000"));
+       celler.setPeriod(-1);
+       celler.setJarid(0);
+       celler.setGroupid(0);
 
-        SqlSession sqlSession= MyBatisUtil.getSqlSession();
 
-        CellerMapper cellerMapper=sqlSession.getMapper(CellerMapper.class);
-        //cellerMapper.AddCeller(celler);
-       // int row =cellerMapper.EditCeller(celler,nceller);
-        CellerInOut c=new CellerInOut();
-        c.setPeriod(-1);
-        List<CellerInOut> list=cellerMapper.SelectAllCeller(celler);
+       List<CellerInOut> list=cellerService.SearchCeller(celler);
 
-        for(CellerInOut celler1:list)
-        {
-            System.out.println(celler.toString());
-        }
-
-        sqlSession.commit();
-        sqlSession.close();;
 
 
 

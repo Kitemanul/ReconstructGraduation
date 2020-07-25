@@ -7,13 +7,13 @@
             type:"post",                               
             url:"/AddCeller",
             data:{
-                "time1":document.formadd.time1.value,
-                "time0":document.formadd.time0.value,
-                "time2":document.formadd.time2.value,
-                "time3":document.formadd.time3.value,
-                "group":document.formadd.group.value,
-                "jar":document.formadd.jar.value,
-                "cycle":document.formadd.cycle.value
+                "intime":document.formadd.time1.value,
+                "time":document.formadd.time0.value,
+                "outtime":document.formadd.time2.value,
+                "Etime":document.formadd.time3.value,
+                "groupid":document.formadd.group.value,
+                "jarid":document.formadd.jar.value,
+                "period":document.formadd.cycle.value
                  },   
             dataType:"text",
             async:true,
@@ -27,31 +27,42 @@
             }); 
 	}
 	
+	function getEditData() {
+        var item = $('#datagrid-celler').datagrid('getSelected');
+        var customerArray = new Array();
+        customerArray.push(
+			{
+                "intime":item.入窖时间,
+                "time":item.时间,
+                "outtime":item.出窖时间,
+                "groupid":item.组号.toString(),
+                "jarid":item.罐号.toString(),
+                "period":item.周期.toString(),
+			}
+		);
+        customerArray.push(
+			{
+                "intime":document.formedit.time1.value,
+                "time":document.formedit.time0.value,
+                "outtime":document.formedit.time2.value,
+                "groupid":document.formedit.group.value,
+                "jarid":document.formedit.jar.value,
+                "period":document.formedit.cycle.value
+			}
+		)
+		return customerArray;
+		
+    }
 	/**
 	* Name 修改记录
 	*/
 	function edit(){
-		var item = $('#datagrid-celler').datagrid('getSelected');
 		$.ajax({  			
             type:"post",                               
             url:"/EditCeller",
-            data:{
-            	"_time1":item.入窖时间,
-                "_time0":item.时间,
-                "_time2":item.出窖时间,              
-                "_group":item.组号,
-                "_jar":item.罐号,
-                "_cycle":item.周期,
-                
-                "time1":document.formedit.time1.value,
-                "time0":document.formedit.time0.value,
-                "time2":document.formedit.time2.value,              
-                "group":document.formedit.group.value,
-                "jar":document.formedit.jar.value,
-                "cycle":document.formedit.cycle.value
-                 },   
-            dataType:"text",
-            async:true,
+			contentType:"application/json",
+			dataType:"text",
+            data:JSON.stringify(getEditData()),
             success:function(Data)
             {   alert(Data);
                             
@@ -78,12 +89,12 @@
 					url:'/RemoveCeller',
 					dataType:"text",
 					data:{
-		            	"_time1":items.入窖时间,
-		                "_time0":items.时间,
-		                "_time2":items.出窖时间,              
-		                "_group":items.组号,
-		                "_jar":items.罐号,
-		                "_cycle":items.周期,
+		            	"intime":items.入窖时间,
+		                "time":items.时间,
+		                "outtime":items.出窖时间,
+		                "groupid":items.组号,
+		                "jarid":items.罐号,
+		                "period":items.周期,
 		                
 		                 },
 					success:function(data){
@@ -216,29 +227,59 @@
 	
 	 //ajax传递搜索数据
 	  function Search()
-			  {
+	  {
 			     
 			  $.ajax({  			
               type:"post",                               
               url:"/SearchCellerData",
-              data:{
-                  "time1":document.search.startime.value,
-                  "time2":document.search.endtime.value,
-                  "group":document.search.groupID.value,
-                  "jar":document.search.jarID.value,
-                  "cycle":document.search.cycle.value
-                   },   
+              data:getSearchData(),
               dataType:"json",
               async:true,
               success:function(Data)
               {   alert(Data.length);
                   $('#datagrid-celler').datagrid('loadData', Data);
 
-              
               },
               error:function()
               {    alert("错误");}
-              }); 
-			    
-			  }
-		
+              });
+	  }
+
+    function getSearchData() {
+        if(document.search.groupID.value=="")
+		{
+			group=0;
+		}
+		else
+		{
+			group=document.search.groupID.value;
+		}
+
+		if(document.search.jarID.value=="")
+		{
+			jar=0;
+		}
+		else
+		{
+			jar=document.search.jarID.value;
+		}
+
+		if(document.search.cycle.value=="")
+		{
+			period=-1;
+		}
+		else
+		{
+			period=document.search.cycle.value;
+		}
+
+	  	Data={
+	  		 "intime":document.search.startime.value,
+            "outtime":document.search.endtime.value,
+            "groupid":group,
+            "jarid":jar,
+            "period":period
+	  	    }
+        return Data;
+
+     }

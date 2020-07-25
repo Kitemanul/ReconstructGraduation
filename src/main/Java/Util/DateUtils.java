@@ -8,6 +8,9 @@ public class DateUtils {
 
     public static String Date2String(Date date)
     {
+        if(date==null)
+            return "";
+
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
         return simpleDateFormat.format(date);

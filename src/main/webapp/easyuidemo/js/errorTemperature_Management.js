@@ -63,11 +63,8 @@
               type:"post",                               
               url:"/ErrorTemperatureSearch",
               data:{
-                  
-             
-                  "group":document.search.groupID.value,
-                  "jar":document.search.jarID.value
-                
+                  "groupid":document.search.groupID.value,
+                  "jarid":document.search.jarID.value
                    },  
           
               dataType:"json",

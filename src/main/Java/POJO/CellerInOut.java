@@ -17,6 +17,7 @@ public class CellerInOut {
     private Date intime;
     private Date outtime;
     private Date Etime;
+    private int rate;
 
 
 

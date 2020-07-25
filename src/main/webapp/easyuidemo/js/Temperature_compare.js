@@ -61,40 +61,48 @@
 	/**
 	* Name 数据载入
 	*/
-	
+
+    function getCompareData() {
+
+        var customerArray = new Array();
+        customerArray.push(
+            {
+                "period": document.search.cycle.value,
+                "groupid": document.search.groupID.value,
+                "jarid": document.search.jarID.value,
+                "rate": document.search.rate1.value
+            }
+            );
+        customerArray.push(
+        	{   "period":document.search.cycle2.value,
+				"groupid":document.search.groupID2.value,
+				"jarid":document.search.jarID2.value,
+				"rate":document.search.rate2.value
+            }
+        );
+        return customerArray;
+
+    }
 	
 	 //ajax传递搜索数据 作图
-	  function draw()
-			  {
+		   function draw()
+    {
 		
 		  $.ajax({  			
               type:"post",                               
               url:"/TemperatureCompare",
-              data:{
-                  
-                  "cycle":document.search.cycle.value,
-                  "group":document.search.groupID.value,
-                  "jar":document.search.jarID.value,
-                  "cycle2":document.search.cycle2.value,
-                  "group2":document.search.groupID2.value,
-                  "jar2":document.search.jarID2.value,
-                  "rate1":document.search.rate1.value,
-                  "rate2":document.search.rate2.value
-                
-                   },  
-          
+              data:JSON.stringify(getCompareData()),
+              contentType:"application/json",
               dataType:"json",
               async:true,
               success:function(Data)
-              {   
-                              
+              {
                   var data1=new Array();
                   var data2=new Array();
                   var rate1=new Array();
                   var rate2=new Array();
                   var m=0;
                   var n=0;
-             
                   for(var i in Data)
                 	  { if(Data[i].分类=='1组')
                 	    {data1[m]=Data[i].温度;                	    
@@ -118,4 +126,4 @@
               {    alert("错误");}
               }); 
 			    
-			  }
+    }

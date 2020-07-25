@@ -66,9 +66,9 @@
               url:"/SearchTemperature",
               data:{
 
-                  "group":document.search.groupID.value,
-                  "jar":document.search.jarID.value,
-                  "cycle":document.search.cycleID.value,
+                  "groupid":document.search.groupID.value,
+                  "jarid":document.search.jarID.value,
+                  "period":document.search.cycleID.value,
                   "rate":document.search.rate.value
                    },  
           
