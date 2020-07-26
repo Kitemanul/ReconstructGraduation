@@ -78,6 +78,7 @@ public class TemperatureController {
         return jsonArray.toString();
     }
 
+
     @RequestMapping("/ErrorTemperatureSearch")
     @ResponseBody
     public String SearchErrorData(CellerInOut celler)
